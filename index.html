@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ponto da Gráfica · Cardápio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAFA;--ink:#111111;--mute:#585B63;--card:#FFFFFF;--line:#BEC1C9;
+  --c:#00AEEF;--m:#E8196F;--y:#FFE600;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#121214;--ink:#F4F4F5;--mute:#A3A6AE;--card:#1B1B1F;--line:#3B3D45}
+}
+:root[data-theme="dark"]{--bg:#121214;--ink:#F4F4F5;--mute:#A3A6AE;--card:#1B1B1F;--line:#3B3D45}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Archivo,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+header{padding:36px 0 22px;text-align:center}
+.logo{width:168px;height:168px;border-radius:50%;display:block;margin:0 auto 16px;box-shadow:0 0 0 4px var(--ink),7px 7px 0 4px var(--m)}
+header p{margin:0 auto;max-width:34ch;color:var(--mute);font-size:1.05rem}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px 0;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:3px solid var(--ink)}
+nav button{flex:none;font:700 .95rem Archivo,sans-serif;padding:8px 14px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+nav button[aria-pressed="true"]{background:var(--m);border-color:var(--m);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+section{padding:28px 0 4px}
+h2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 6px;padding:10px 16px;background:#111;color:#fff;font-weight:900;font-size:1.25rem;letter-spacing:.02em;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 50%,100% 100%,0 100%,12px 50%)}
+h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:15px 0 var(--m),30px 0 var(--y),45px 0 #555;margin-right:50px}
+.sub{margin:0 0 6px;padding:0 4px;color:var(--mute);font-size:.95rem}
+.item{display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:center;padding:14px 4px;border-bottom:2px dotted var(--line)}
+.item b{font-weight:800}
+.item small{grid-column:1;color:var(--mute);font-size:.9rem}
+.price{grid-row:1;grid-column:2;font-weight:900;font-size:1.15rem;white-space:nowrap}
+.price.ask{font-weight:800;font-size:.95rem;color:var(--m)}
+.add{grid-row:2;grid-column:2;justify-self:end;font:700 .85rem Archivo,sans-serif;padding:6px 12px;border-radius:8px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.add.ask{background:transparent;color:var(--m);border-color:var(--m)}
+.how{margin:36px 0 28px;padding:20px;border:3px solid var(--ink);border-radius:14px;background:var(--card);box-shadow:7px 7px 0 var(--m)}
+.how h3{margin:0 0 6px;font-weight:900;font-size:1.2rem}
+.how p{margin:6px 0;color:var(--mute)}
+.how a{color:var(--m);font-weight:800}
+.fale{display:flex;align-items:center;gap:14px;background:#111;color:#fff;border-radius:18px;padding:16px 20px;text-decoration:none;position:relative;overflow:hidden}
+.fale svg{flex:none;width:44px;height:44px}
+.fale small{display:block;font-weight:500;opacity:.85}
+.fale b{font-weight:900;font-size:1.5rem;line-height:1.2}
+.fale i{position:absolute;right:-14px;top:-10px;bottom:-10px;width:100px;background:linear-gradient(110deg,transparent 0 20%,var(--c) 20% 40%,var(--m) 40% 60%,var(--y) 60% 80%,transparent 80%)}
+.galeria{display:flex;gap:10px;overflow-x:auto;padding:6px 4px 14px}
+.galeria img{flex:none;height:150px;width:auto;border-radius:10px;border:2px solid var(--ink);cursor:zoom-in}
+.thumb{grid-column:1 / -1;margin-top:10px;width:100%;max-width:300px;height:auto;border-radius:10px;border:2px solid var(--ink);cursor:zoom-in}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:20;padding:20px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:100%;border-radius:10px}
+.tag{text-align:center;font-weight:800;margin:16px 0 120px}
+.tag span{color:var(--m)}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;display:none;z-index:10}
+#bar.on{display:block}
+#bar .in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
+#bar span{font-weight:700}
+#send{font:800 1rem Archivo,sans-serif;padding:10px 18px;border-radius:10px;border:0;background:var(--m);color:#fff;cursor:pointer}
+#clear{font:500 .85rem Archivo,sans-serif;background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0;opacity:.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" alt="Logo da Ponto da Gráfica" src="imagens/logo.jpg">
+    <h1 class="sr">Ponto da Gráfica</h1>
+    <p>Impressões, fotos, presentes e ajuda digital, em Manaus. Escolha, toque em Adicionar e envie o pedido pelo WhatsApp.</p>
+  </header>
+  <nav id="tabs" aria-label="Categorias"></nav>
+  <main id="menu"></main>
+  <div class="how">
+    <h3>Como pedir</h3>
+    <p>Adicione os itens, toque em Enviar pedido e conclua a conversa no WhatsApp. Combinamos prazo, pagamento e entrega por lá.</p>
+    <p>Serviços sob consulta têm o valor combinado de acordo com o tempo e o prazo do trabalho.</p>
+    <p>Instagram: <a id="ig" href="#" rel="noopener">@pontodagrafica_</a></p>
+  </div>
+  <a class="fale" id="fale" href="#" rel="noopener">
+    <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4C12 4 4 11.6 4 21c0 3.4 1 6.5 2.8 9.1L5 40l10.3-2.6c2 .9 4.2 1.4 6.7 1.4 10 0 18-7.600 18-17S32 4 22 4z" fill="none" stroke="#E8196F" stroke-width="3.500" stroke-linejoin="round"/><path d="M16 14c0 8 6 14 14 14l1-4-4-2-2 2c-2-1-4-3-5-5l2-2-2-4z" fill="#E8196F"/></svg>
+    <span><small>Fale conosco</small><b>(92) 99109-0146</b></span><i></i>
+  </a>
+  <p class="tag">Ponto da Gráfica: <span>suas ideias ganham vida no papel!</span></p>
+</div>
+
+<div id="lb" aria-hidden="true"><img alt=""></div>
+
+<div id="bar"><div class="in">
+  <div><span id="count"></span><br><button id="clear" type="button">Limpar</button></div>
+  <button id="send" type="button">Enviar pedido</button>
+</div></div>
+
+<script>
+/* ===== EDITE AQUI ===== */
+const CONFIG = { whatsapp: "5592991090146", instagram: "pontodagrafica_" };
+/* p: preço em reais. Sem p = sob consulta */
+const MENU = [
+  { cat: "Impressões e trabalhos", sub: "Para estudos, trabalhos e documentos", items: [
+    { n: "Impressão preto e branco", d: "Por folha A4", p: 1.00 },
+    { n: "Impressão colorida", d: "Por folha A4", p: 2.00 },
+    { n: "Digitação e formatação de trabalho", d: "Por trabalho, impressão à parte", p: 10.00 },
+    { n: "Criação de apresentação (slides)", d: "Slides com design personalizado, prontos para apresentar", img: "imagens/slides-bullying.png" },
+    { n: "Auxílio digital", d: "Agendamentos, formulários, emissão de documentos, cadastros e suporte com apps, WhatsApp e e-mails" }
+  ]},
+  { cat: "Fotos e polaroids", sub: "Impressas em papel fotográfico", items: [
+    { n: "Foto 10x15 cm", d: "Revelação por unidade", p: 3.00 },
+    { n: "Polaroid pequena", d: "Recortada à mão, por unidade", p: 2.00, img: "imagens/polaroids-1.jpeg" },
+    { n: "Polaroid média", d: "Recortada à mão, por unidade", p: 3.50, img: "imagens/polaroids-2.jpeg" },
+    { n: "Kit com 10 polaroids", d: "Tamanho à escolha", p: 25.00 }
+  ]},
+  { cat: "Plaquinhas e plastificação", sub: "Para o seu negócio ou seus documentos", items: [
+    { n: "Combo plaquinha Pix + plastificação", d: "Plaquinha personalizada com o seu QR Code, já plastificada", p: 12.00 },
+    { n: "Plastificação A4", d: "Por folha", p: 4.00 }
+  ]},
+  { cat: "Presentes", sub: "Prontos para entregar", items: [
+    { n: "Caixa de presente com polaroids", d: "Caixa decorada com 6 polaroids", p: 35.00 }
+  ]}
+];
+/* ======================== */
+
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const wa = t => window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`, "_blank", "noopener");
+const cart = {};
+const menuEl = document.getElementById("menu"), tabsEl = document.getElementById("tabs");
+let active = "Tudo";
+
+function foto(src, alt) {
+  const i = new Image();
+  i.src = src; i.alt = alt; i.loading = "lazy";
+  i.onclick = () => abrirFoto(src, alt);
+  return i;
+}
+const lb = document.getElementById("lb");
+function abrirFoto(src, alt) { lb.querySelector("img").src = src; lb.querySelector("img").alt = alt; lb.classList.add("on"); }
+lb.onclick = () => lb.classList.remove("on");
+document.addEventListener("keydown", e => { if (e.key === "Escape") lb.classList.remove("on"); });
+
+function renderTabs() {
+  tabsEl.innerHTML = "";
+  ["Tudo", ...MENU.map(m => m.cat)].forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = c; b.setAttribute("aria-pressed", c === active);
+    b.onclick = () => { active = c; renderTabs(); renderMenu(); };
+    tabsEl.appendChild(b);
+  });
+}
+function renderMenu() {
+  menuEl.innerHTML = "";
+  MENU.filter(m => active === "Tudo" || m.cat === active).forEach(m => {
+    const s = document.createElement("section");
+    s.innerHTML = `<h2>${m.cat}</h2><p class="sub">${m.sub}</p>`;
+    if (m.galeria) {
+      const g = document.createElement("div");
+      g.className = "galeria";
+      m.galeria.forEach(src => g.appendChild(foto(src, "Exemplo de " + m.cat)));
+      s.appendChild(g);
+    }
+    m.items.forEach(it => {
+      const ask = it.p === undefined;
+      const r = document.createElement("div");
+      r.className = "item";
+      r.innerHTML = `<b>${it.n}</b><span class="price${ask ? " ask" : ""}">${ask ? "Sob consulta" : brl(it.p)}</span><small>${it.d}</small>`;
+      const a = document.createElement("button");
+      a.type = "button"; a.className = "add" + (ask ? " ask" : "");
+      a.textContent = ask ? "Consultar" : "Adicionar";
+      a.onclick = ask
+        ? () => wa(`Olá, Ponto da Gráfica! Gostaria de um orçamento para: ${it.n}.`)
+        : () => { cart[it.n] = { it, q: (cart[it.n]?.q || 0) + 1 }; renderBar(); };
+      r.appendChild(a);
+      if (it.img) { const f = foto(it.img, "Exemplo: " + it.n); f.className = "thumb"; r.appendChild(f); }
+      s.appendChild(r);
+    });
+    menuEl.appendChild(s);
+  });
+}
+function renderBar() {
+  const lines = Object.values(cart);
+  const qty = lines.reduce((a, l) => a + l.q, 0);
+  const total = lines.reduce((a, l) => a + l.q * l.it.p, 0);
+  document.getElementById("bar").classList.toggle("on", qty > 0);
+  document.getElementById("count").textContent = `${qty} ${qty === 1 ? "item" : "itens"} · ${brl(total)}`;
+}
+document.getElementById("clear").onclick = () => { Object.keys(cart).forEach(k => delete cart[k]); renderBar(); };
+document.getElementById("send").onclick = () => {
+  const lines = Object.values(cart);
+  const total = lines.reduce((a, l) => a + l.q * l.it.p, 0);
+  wa("Olá, Ponto da Gráfica! Quero fazer um pedido:\n" +
+    lines.map(l => `• ${l.q}x ${l.it.n} (${brl(l.q * l.it.p)})`).join("\n") +
+    `\n\nTotal estimado: ${brl(total)}`);
+};
+document.getElementById("fale").href = `https://wa.me/${CONFIG.whatsapp}`;
+document.getElementById("ig").href = `https://instagram.com/${CONFIG.instagram}`;
+renderTabs(); renderMenu();
+</script>
+</body>
+</html>
