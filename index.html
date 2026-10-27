@@ -22,9 +22,15 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Archivo,system-ui,sans-serif;line-height:1.5}
 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-header{padding:36px 0 22px;text-align:center}
-.logo{width:168px;height:168px;border-radius:50%;display:block;margin:0 auto 16px;box-shadow:0 0 0 4px var(--ink),7px 7px 0 4px var(--m)}
-header p{margin:0 auto;max-width:34ch;color:var(--mute);font-size:1.05rem}
+.hero{background:#111;color:#fff;text-align:center;padding:40px 20px 64px;position:relative}
+.hero::before{content:"";position:absolute;inset:0 0 auto;height:8px;background:linear-gradient(90deg,var(--c) 0 25%,var(--m) 25% 50%,var(--y) 50% 75%,#fff 75%)}
+.logo{width:132px;height:132px;border-radius:50%;display:block;margin:0 auto 16px;box-shadow:0 0 0 4px #fff,0 0 0 8px var(--m)}
+.hero h1{margin:18px 0 6px;font-weight:900;font-size:clamp(1.9rem,7vw,2.6rem);line-height:1.1}
+.hero p{margin:0 auto;max-width:36ch;color:#C9CBD2}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:700;font-size:.9rem}
+.status[hidden]{display:none}
+.status i{width:9px;height:9px;border-radius:50%;background:#8B8E96}
+.status.on i{background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,.3)}
 nav{display:flex;gap:8px;overflow-x:auto;padding:12px 0;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:3px solid var(--ink)}
 nav button{flex:none;font:700 .95rem Archivo,sans-serif;padding:8px 14px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
 nav button[aria-pressed="true"]{background:var(--m);border-color:var(--m);color:#fff}
@@ -33,13 +39,25 @@ section{padding:28px 0 4px}
 h2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 6px;padding:10px 16px;background:#111;color:#fff;font-weight:900;font-size:1.25rem;letter-spacing:.02em;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 50%,100% 100%,0 100%,12px 50%)}
 h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:15px 0 var(--m),30px 0 var(--y),45px 0 #555;margin-right:50px}
 .sub{margin:0 0 6px;padding:0 4px;color:var(--mute);font-size:.95rem}
-.item{display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:center;padding:14px 4px;border-bottom:2px dotted var(--line)}
-.item b{font-weight:800}
-.item small{grid-column:1;color:var(--mute);font-size:.9rem}
-.price{grid-row:1;grid-column:2;font-weight:900;font-size:1.15rem;white-space:nowrap}
+.item{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:14px;margin:12px 0;box-shadow:4px 4px 0 var(--line)}
+.top{display:flex;gap:12px;align-items:flex-start}
+.t b{display:block;font-weight:800;font-size:1.05rem}
+.t small{display:block;color:var(--mute);font-size:.9rem;line-height:1.35}
+.bot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:10px;border-top:2px dotted var(--line)}
+.price{font-weight:900;font-size:1.25rem;white-space:nowrap}
 .price.ask{font-weight:800;font-size:.95rem;color:var(--m)}
-.add{grid-row:2;grid-column:2;justify-self:end;font:700 .85rem Archivo,sans-serif;padding:6px 12px;border-radius:8px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.add{font:800 .9rem Archivo,sans-serif;padding:9px 16px;border-radius:10px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
 .add.ask{background:transparent;color:var(--m);border-color:var(--m)}
+.step{display:inline-flex;align-items:center;border:2px solid var(--m);border-radius:10px;overflow:hidden}
+.step button{width:38px;height:36px;border:0;background:var(--m);color:#fff;font:900 1.2rem Archivo,sans-serif;cursor:pointer}
+.step span{min-width:34px;text-align:center;font-weight:800}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:-34px 0 6px;position:relative;z-index:1}
+.acao{display:flex;flex-direction:column;gap:2px;padding:12px 14px;text-align:left;text-decoration:none;color:var(--ink);background:var(--card);border:3px solid var(--ink);border-radius:14px;font:800 1.05rem Archivo,sans-serif;cursor:pointer;box-shadow:5px 5px 0 var(--m)}
+.acao:nth-child(2){box-shadow:5px 5px 0 var(--c)}
+.acao:nth-child(3){box-shadow:5px 5px 0 var(--y)}
+.acao:nth-child(4){box-shadow:5px 5px 0 var(--ink)}
+.acao:last-child:nth-child(odd){grid-column:1/-1}
+.acao small{font-weight:500;font-size:.85rem;color:var(--mute);line-height:1.3}
 .how{margin:36px 0 28px;padding:20px;border:3px solid var(--ink);border-radius:14px;background:var(--card);box-shadow:7px 7px 0 var(--m)}
 .how h3{margin:0 0 6px;font-weight:900;font-size:1.2rem}
 .how p{margin:6px 0;color:var(--mute)}
@@ -51,13 +69,17 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
 .fale i{position:absolute;right:-14px;top:-10px;bottom:-10px;width:100px;background:linear-gradient(110deg,transparent 0 20%,var(--c) 20% 40%,var(--m) 40% 60%,var(--y) 60% 80%,transparent 80%)}
 .galeria{display:flex;gap:10px;overflow-x:auto;padding:6px 4px 14px}
 .galeria img{flex:none;height:150px;width:auto;border-radius:10px;border:2px solid var(--ink);cursor:zoom-in}
-.thumb{grid-column:1 / -1;margin-top:10px;width:100%;max-width:300px;height:auto;border-radius:10px;border:2px solid var(--ink);cursor:zoom-in}
+.thumb{flex:none;width:64px;height:64px;object-fit:cover;border-radius:12px;border:2px solid var(--ink);cursor:zoom-in}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:20;padding:20px;cursor:zoom-out}
 #lb.on{display:flex}
 #lb img{max-width:100%;max-height:100%;border-radius:10px}
-.tag{text-align:center;font-weight:800;margin:16px 0 120px}
+.tag{text-align:center;font-weight:800;margin:24px 0 6px}
 .tag span{color:var(--m)}
-#bar{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;display:none;z-index:10}
+.credit{text-align:center;font-size:.85rem;color:var(--mute);margin:0 0 120px}
+.credit a{color:inherit;font-weight:700}
+.btn{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:10px;background:var(--ink);color:var(--bg)!important;text-decoration:none;font-weight:800}
+.map{display:block;width:100%;height:220px;margin-top:12px;border:2px solid var(--ink);border-radius:12px}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;display:none;z-index:10;border-radius:18px 18px 0 0;box-shadow:0 -6px 20px rgba(0,0,0,.25)}
 #bar.on{display:block}
 #bar .in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
 #bar span{font-weight:700}
@@ -66,12 +88,14 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
 </style>
 </head>
 <body>
+<header class="hero">
+  <img class="logo" alt="Logo da Ponto da Gráfica" src="imagens/logo.jpg">
+  <h1>Ponto da Gráfica</h1>
+  <p>Impressões, fotos, presentes e ajuda digital, em Manaus. Escolha, toque em Adicionar e envie o pedido pelo WhatsApp.</p>
+  <div class="status" id="status" hidden><i></i><span></span></div>
+</header>
 <div class="wrap">
-  <header>
-    <img class="logo" alt="Logo da Ponto da Gráfica" src="imagens/logo.jpg">
-    <h1 class="sr">Ponto da Gráfica</h1>
-    <p>Impressões, fotos, presentes e ajuda digital, em Manaus. Escolha, toque em Adicionar e envie o pedido pelo WhatsApp.</p>
-  </header>
+  <div class="acoes" id="acoes"></div>
   <nav id="tabs" aria-label="Categorias"></nav>
   <main id="menu"></main>
   <div class="how">
@@ -80,11 +104,13 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
     <p>Serviços sob consulta têm o valor combinado de acordo com o tempo e o prazo do trabalho.</p>
     <p>Instagram: <a id="ig" href="#" rel="noopener">@pontodagrafica_</a></p>
   </div>
+  <div class="how" id="info" hidden></div>
   <a class="fale" id="fale" href="#" rel="noopener">
     <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 4C12 4 4 11.6 4 21c0 3.4 1 6.5 2.8 9.1L5 40l10.3-2.6c2 .9 4.2 1.4 6.7 1.4 10 0 18-7.600 18-17S32 4 22 4z" fill="none" stroke="#E8196F" stroke-width="3.500" stroke-linejoin="round"/><path d="M16 14c0 8 6 14 14 14l1-4-4-2-2 2c-2-1-4-3-5-5l2-2-2-4z" fill="#E8196F"/></svg>
     <span><small>Fale conosco</small><b>(92) 99109-0146</b></span><i></i>
   </a>
   <p class="tag">Ponto da Gráfica: <span>suas ideias ganham vida no papel!</span></p>
+  <p class="credit">Página criada pela <a href="https://instagram.com/hypestudio.oficial" target="_blank" rel="noopener">HYPESTUDIO</a></p>
 </div>
 
 <div id="lb" aria-hidden="true"><img alt=""></div>
@@ -96,7 +122,13 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
 
 <script>
 /* ===== EDITE AQUI ===== */
-const CONFIG = { whatsapp: "5592991090146", instagram: "pontodagrafica_" };
+const CONFIG = {
+  whatsapp: "5592991090146", instagram: "pontodagrafica_",
+  pix: { chave: "92991090146", nome: "Agatha Christie Wilkens de Figueiredo" },   // chave Pix + nome de quem recebe (o botão só aparece se a chave estiver preenchida)
+  google: "https://search.google.com/local/writereview?placeid=ChIJo2PA2kEZbJIR2WnhES_ZoaA",                     // link para avaliar no Google (o botão só aparece se preenchido)
+  agenda: { dias: [1, 2, 3, 4, 5], abre: "08:30", fecha: "21:00" }, // usado só para mostrar "Aberto agora" (horário de Manaus)
+  local: "Av. Buriti 700, Colonia terra Nova", horario: "Segunda a Sexta, das 08:30 - 21:00", mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3314939583524!2d-60.01958635508324!3d-3.005186728904144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x926c1941dac063a3%3A0xa0a1d92f11e169d9!2sPonto%20da%20Gr%C3%A1fica!5e0!3m2!1spt-BR!2sbr!4v1793131871432!5m2!1spt-BR!2sbr" // opcionais: bairro/endereço, horário e link do Google Maps
+};
 /* p: preço em reais. Sem p = sob consulta */
 const MENU = [
   { cat: "Impressões e trabalhos", sub: "Para estudos, trabalhos e documentos", items: [
@@ -107,17 +139,19 @@ const MENU = [
     { n: "Auxílio digital", d: "Agendamentos, formulários, emissão de documentos, cadastros e suporte com apps, WhatsApp e e-mails" }
   ]},
   { cat: "Fotos e polaroids", sub: "Impressas em papel fotográfico", items: [
-    { n: "Foto 10x15 cm", d: "Revelação por unidade", p: 3.00 },
-    { n: "Polaroid pequena", d: "Recortada à mão, por unidade", p: 2.00, img: "imagens/polaroids-1.jpeg" },
-    { n: "Polaroid média", d: "Recortada à mão, por unidade", p: 3.50, img: "imagens/polaroids-2.jpeg" },
-    { n: "Kit com 10 polaroids", d: "Tamanho à escolha", p: 25.00 }
+    { n: "Foto 10x15 cm", d: "Revelação por unidade", p: 3.00, img: "imagens/foto-10x15.jpg" },
+    { n: "Polaroid pequena", d: "Recortada à mão, por unidade", p: 1.50, img: "imagens/polaroids-1.jpeg" },
+    { n: "Polaroid média", d: "Recortada à mão, por unidade", p: 2.50, img: "imagens/polaroids-2.jpeg" },
+    { n: "Kit com 10 polaroids", tag: "Promoção", d: "Tamanho à escolha. Promoção: 10 pequenas por R$ 10,00 (R$ 1,00 cada) ou 10 médias por R$ 20,00 (R$ 2,00 cada)." }
   ]},
   { cat: "Plaquinhas e plastificação", sub: "Para o seu negócio ou seus documentos", items: [
     { n: "Combo plaquinha Pix + plastificação", d: "Plaquinha personalizada com o seu QR Code, já plastificada", p: 12.00 },
+    // Descomente quando os chips NFC chegarem:
+    // { n: "Plaquinha Pix + NFC", d: "QR Code do Pix e chip NFC: é só encostar o celular para avaliar, seguir e ver o cardápio" },
     { n: "Plastificação A4", d: "Por folha", p: 4.00 }
   ]},
   { cat: "Presentes", sub: "Prontos para entregar", items: [
-    { n: "Caixa de presente com polaroids", d: "Caixa decorada com 6 polaroids", p: 35.00 }
+    { n: "Caixa de presente com polaroids", d: "Caixa decorada com 6 polaroids", p: 35.00, img: "imagens/caixa-presente.jpg" }
   ]}
 ];
 /* ======================== */
@@ -160,23 +194,30 @@ function renderMenu() {
       s.appendChild(g);
     }
     m.items.forEach(it => {
-      const ask = it.p === undefined;
-      const r = document.createElement("div");
+      const ask = it.p === undefined, r = document.createElement("div");
       r.className = "item";
-      r.innerHTML = `<b>${it.n}</b><span class="price${ask ? " ask" : ""}">${ask ? "Sob consulta" : brl(it.p)}</span><small>${it.d}</small>`;
-      const a = document.createElement("button");
-      a.type = "button"; a.className = "add" + (ask ? " ask" : "");
-      a.textContent = ask ? "Consultar" : "Adicionar";
-      a.onclick = ask
-        ? () => wa(`Olá, Ponto da Gráfica! Gostaria de um orçamento para: ${it.n}.`)
-        : () => { cart[it.n] = { it, q: (cart[it.n]?.q || 0) + 1 }; renderBar(); };
-      r.appendChild(a);
-      if (it.img) { const f = foto(it.img, "Exemplo: " + it.n); f.className = "thumb"; r.appendChild(f); }
+      r.innerHTML = `<div class="top"><div class="t"><b>${it.n}</b><small>${it.d}</small></div></div><div class="bot"><span class="price${ask ? " ask" : ""}">${ask ? "Sob consulta" : brl(it.p)}</span><span class="ctl"></span></div>`;
+      if (it.img) { const f = foto(it.img, "Exemplo: " + it.n); f.className = "thumb"; r.firstChild.prepend(f); }
+      const ctl = r.querySelector(".ctl");
+      const mk = (txt, cls, fn, label) => { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = txt; b.onclick = fn; if (label) b.setAttribute("aria-label", label); return b; };
+      r._draw = () => {
+        ctl.innerHTML = ""; const q = cart[it.n]?.q || 0;
+        if (ask) ctl.appendChild(mk("Consultar", "add ask", () => wa(`Olá, Ponto da Gráfica! Gostaria de um orçamento para: ${it.n}.`)));
+        else if (!q) ctl.appendChild(mk("Adicionar", "add", () => setQ(it, 1)));
+        else {
+          const st = document.createElement("span"); st.className = "step";
+          st.append(mk("−", "", () => setQ(it, q - 1), "Remover um"), Object.assign(document.createElement("span"), { textContent: q }), mk("+", "", () => setQ(it, q + 1), "Adicionar mais um"));
+          ctl.appendChild(st);
+        }
+      };
+      r._draw();
       s.appendChild(r);
     });
     menuEl.appendChild(s);
   });
 }
+function redraw() { document.querySelectorAll(".item").forEach(e => e._draw && e._draw()); }
+function setQ(it, q) { if (q <= 0) delete cart[it.n]; else cart[it.n] = { it, q }; redraw(); renderBar(); }
 function renderBar() {
   const lines = Object.values(cart);
   const qty = lines.reduce((a, l) => a + l.q, 0);
@@ -184,7 +225,7 @@ function renderBar() {
   document.getElementById("bar").classList.toggle("on", qty > 0);
   document.getElementById("count").textContent = `${qty} ${qty === 1 ? "item" : "itens"} · ${brl(total)}`;
 }
-document.getElementById("clear").onclick = () => { Object.keys(cart).forEach(k => delete cart[k]); renderBar(); };
+document.getElementById("clear").onclick = () => { Object.keys(cart).forEach(k => delete cart[k]); redraw(); renderBar(); };
 document.getElementById("send").onclick = () => {
   const lines = Object.values(cart);
   const total = lines.reduce((a, l) => a + l.q * l.it.p, 0);
@@ -192,9 +233,56 @@ document.getElementById("send").onclick = () => {
     lines.map(l => `• ${l.q}x ${l.it.n} (${brl(l.q * l.it.p)})`).join("\n") +
     `\n\nTotal estimado: ${brl(total)}`);
 };
+const copiar = async t => {
+  try { await navigator.clipboard.writeText(t); return true; } catch {}
+  const x = document.createElement("textarea");
+  x.value = t; x.style.cssText = "position:fixed;opacity:0";
+  document.body.appendChild(x); x.select();
+  let ok = false; try { ok = document.execCommand("copy"); } catch {}
+  x.remove(); return ok;
+};
+function renderAcoes() {
+  const box = document.getElementById("acoes"), { pix, google } = CONFIG, A = [];
+  if (pix.chave) A.push({ t: "Pagar com Pix", s: "Copiar chave Pix" + (pix.nome ? " · " + pix.nome : ""), pix: true });
+  if (google) A.push({ t: "Avaliar no Google", s: "Conte como foi, leva 1 minuto", href: google });
+  A.push({ t: "WhatsApp", s: "Fale com a gente", href: `https://wa.me/${CONFIG.whatsapp}` });
+  A.push({ t: "Instagram", s: "@" + CONFIG.instagram, href: `https://instagram.com/${CONFIG.instagram}` });
+  A.forEach(a => {
+    const el = document.createElement(a.pix ? "button" : "a");
+    el.className = "acao";
+    if (a.href) { el.href = a.href; el.target = "_blank"; el.rel = "noopener"; } else el.type = "button";
+    el.innerHTML = `<b>${a.t}</b><small>${a.s}</small>`;
+    if (a.pix) el.onclick = async () => {
+      const s = el.querySelector("small"), o = s.textContent;
+      s.textContent = (await copiar(pix.chave)) ? "Chave copiada! Cole no app do seu banco" : "Não foi possível copiar. Chave: " + pix.chave;
+      setTimeout(() => s.textContent = o, 3500);
+    };
+    box.appendChild(el);
+  });
+}
+function renderInfo() {
+  const { local, horario, mapa, google } = CONFIG;
+  if (!local && !horario && !mapa) return;
+  const pid = (google.match(/placeid=([^&]+)/) || [])[1], emb = mapa.includes("/maps/embed");
+  const link = emb ? (pid ? `https://www.google.com/maps/place/?q=place_id:${pid}` : "") : mapa;
+  const d = document.getElementById("info");
+  d.innerHTML = "<h3>Onde estamos</h3>" + (local ? `<p>${local}</p>` : "") + (horario ? `<p>${horario}</p>` : "") +
+    (emb ? `<iframe class="map" src="${mapa}" title="Mapa da Ponto da Gráfica" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>` : "") +
+    (link ? `<a class="btn" href="${link}" target="_blank" rel="noopener">Abrir no mapa</a>` : "");
+  d.hidden = false;
+}
+function renderStatus() {
+  const g = CONFIG.agenda, el = document.getElementById("status");
+  if (!g) return;
+  const n = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Manaus" })), hm = t => { const [h, m] = t.split(":"); return +h * 60 + +m; };
+  const min = n.getHours() * 60 + n.getMinutes(), open = g.dias.includes(n.getDay()) && min >= hm(g.abre) && min < hm(g.fecha);
+  el.classList.toggle("on", open);
+  el.querySelector("span").textContent = open ? "Aberto agora · até " + g.fecha : "Fechado agora" + (CONFIG.horario ? " · " + CONFIG.horario : "");
+  el.hidden = false;
+}
 document.getElementById("fale").href = `https://wa.me/${CONFIG.whatsapp}`;
 document.getElementById("ig").href = `https://instagram.com/${CONFIG.instagram}`;
-renderTabs(); renderMenu();
+renderAcoes(); renderInfo(); renderStatus(); renderTabs(); renderMenu();
 </script>
 </body>
 </html>
