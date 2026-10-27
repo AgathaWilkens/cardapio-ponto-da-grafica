@@ -44,6 +44,8 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
 .t b{display:block;font-weight:800;font-size:1.05rem}
 .t small{display:block;color:var(--mute);font-size:.9rem;line-height:1.35}
 .bot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:10px;border-top:2px dotted var(--line)}
+.promo{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--y);color:#111;font-style:normal;font-weight:900;font-size:.72rem;vertical-align:middle}
+.de{margin-right:6px;color:var(--mute);font-weight:600;font-size:.9rem;text-decoration:line-through}
 .price{font-weight:900;font-size:1.25rem;white-space:nowrap}
 .price.ask{font-weight:800;font-size:.95rem;color:var(--m)}
 .add{font:800 .9rem Archivo,sans-serif;padding:9px 16px;border-radius:10px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
@@ -78,6 +80,8 @@ h2::after{content:"";flex:none;width:10px;height:10px;border-radius:50%;backgrou
 .credit{text-align:center;font-size:.85rem;color:var(--mute);margin:0 0 120px}
 .credit a{color:inherit;font-weight:700}
 .btn{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:10px;background:var(--ink);color:var(--bg)!important;text-decoration:none;font-weight:800}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.btns .btn{margin-top:0}
 .map{display:block;width:100%;height:220px;margin-top:12px;border:2px solid var(--ink);border-radius:12px}
 #bar{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;display:none;z-index:10;border-radius:18px 18px 0 0;box-shadow:0 -6px 20px rgba(0,0,0,.25)}
 #bar.on{display:block}
@@ -126,8 +130,8 @@ const CONFIG = {
   whatsapp: "5592991090146", instagram: "pontodagrafica_",
   pix: { chave: "92991090146", nome: "Agatha Christie Wilkens de Figueiredo" },   // chave Pix + nome de quem recebe (o botão só aparece se a chave estiver preenchida)
   google: "https://search.google.com/local/writereview?placeid=ChIJo2PA2kEZbJIR2WnhES_ZoaA",                     // link para avaliar no Google (o botão só aparece se preenchido)
-  agenda: { dias: [1, 2, 3, 4, 5], abre: "08:30", fecha: "21:00" }, // usado só para mostrar "Aberto agora" (horário de Manaus)
-  local: "Av. Buriti 700, Colonia terra Nova", horario: "Segunda a Sexta, das 08:30 - 21:00", mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3314939583524!2d-60.01958635508324!3d-3.005186728904144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x926c1941dac063a3%3A0xa0a1d92f11e169d9!2sPonto%20da%20Gr%C3%A1fica!5e0!3m2!1spt-BR!2sbr!4v1793131871432!5m2!1spt-BR!2sbr" // opcionais: bairro/endereço, horário e link do Google Maps
+  agenda: { semana: ["08:30", "21:00"], sabado: ["08:30", "18:30"] }, // usado só para mostrar "Aberto agora" (horário de Manaus)
+  local: "Av. Buriti 700, Colonia terra Nova", horario: "Segunda a Sexta, das 08:30 - 21:00 · Sábado, das 08:30 - 18:30", mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3314939583524!2d-60.01958635508324!3d-3.005186728904144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x926c1941dac063a3%3A0xa0a1d92f11e169d9!2sPonto%20da%20Gr%C3%A1fica!5e0!3m2!1spt-BR!2sbr!4v1793131871432!5m2!1spt-BR!2sbr" // opcionais: bairro/endereço, horário e link do Google Maps
 };
 /* p: preço em reais. Sem p = sob consulta */
 const MENU = [
@@ -142,7 +146,7 @@ const MENU = [
     { n: "Foto 10x15 cm", d: "Revelação por unidade", p: 3.00, img: "imagens/foto-10x15.jpg" },
     { n: "Polaroid pequena", d: "Recortada à mão, por unidade", p: 1.50, img: "imagens/polaroids-1.jpeg" },
     { n: "Polaroid média", d: "Recortada à mão, por unidade", p: 2.50, img: "imagens/polaroids-2.jpeg" },
-    { n: "Kit com 10 polaroids", tag: "Promoção", d: "Tamanho à escolha. Promoção: 10 pequenas por R$ 10,00 (R$ 1,00 cada) ou 10 médias por R$ 20,00 (R$ 2,00 cada)." }
+    { n: "Kit com 10 polaroids", tag: "Promoção", d: "Tamanho à escolha. Promoção: 10 pequenas por R$ 10,00 (R$ 1,00 cada, em vez de R$ 1,50) ou 10 médias por R$ 20,00 (R$ 2,00 cada, em vez de R$ 2,50)." }
   ]},
   { cat: "Plaquinhas e plastificação", sub: "Para o seu negócio ou seus documentos", items: [
     { n: "Combo plaquinha Pix + plastificação", d: "Plaquinha personalizada com o seu QR Code, já plastificada", p: 12.00 },
@@ -196,7 +200,7 @@ function renderMenu() {
     m.items.forEach(it => {
       const ask = it.p === undefined, r = document.createElement("div");
       r.className = "item";
-      r.innerHTML = `<div class="top"><div class="t"><b>${it.n}</b><small>${it.d}</small></div></div><div class="bot"><span class="price${ask ? " ask" : ""}">${ask ? "Sob consulta" : brl(it.p)}</span><span class="ctl"></span></div>`;
+      r.innerHTML = `<div class="top"><div class="t"><b>${it.n}${it.tag ? `<em class="promo">${it.tag}</em>` : ""}</b><small>${it.d}</small></div></div><div class="bot"><span class="price${ask ? " ask" : ""}">${ask ? "Sob consulta" : (it.de ? `<s class="de">${brl(it.de)}</s>` : "") + brl(it.p)}</span><span class="ctl"></span></div>`;
       if (it.img) { const f = foto(it.img, "Exemplo: " + it.n); f.className = "thumb"; r.firstChild.prepend(f); }
       const ctl = r.querySelector(".ctl");
       const mk = (txt, cls, fn, label) => { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = txt; b.onclick = fn; if (label) b.setAttribute("aria-label", label); return b; };
@@ -274,10 +278,11 @@ function renderInfo() {
 function renderStatus() {
   const g = CONFIG.agenda, el = document.getElementById("status");
   if (!g) return;
-  const n = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Manaus" })), hm = t => { const [h, m] = t.split(":"); return +h * 60 + +m; };
-  const min = n.getHours() * 60 + n.getMinutes(), open = g.dias.includes(n.getDay()) && min >= hm(g.abre) && min < hm(g.fecha);
+  const n = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Manaus" })), dia = n.getDay(), hm = t => { const [h, m] = t.split(":"); return +h * 60 + +m; };
+  const h = dia >= 1 && dia <= 5 ? g.semana : dia === 6 ? g.sabado : null, min = n.getHours() * 60 + n.getMinutes();
+  const open = !!h && min >= hm(h[0]) && min < hm(h[1]);
   el.classList.toggle("on", open);
-  el.querySelector("span").textContent = open ? "Aberto agora · até " + g.fecha : "Fechado agora" + (CONFIG.horario ? " · " + CONFIG.horario : "");
+  el.querySelector("span").textContent = open ? "Aberto agora · até " + h[1] : "Fechado agora" + (CONFIG.horario ? " · " + CONFIG.horario : "");
   el.hidden = false;
 }
 document.getElementById("fale").href = `https://wa.me/${CONFIG.whatsapp}`;
